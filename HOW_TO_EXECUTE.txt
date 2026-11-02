@@ -1,0 +1,189 @@
+================================================================================
+  ENTERPRISE APACHE FLINK EVENT CORRELATION PIPELINE - EXECUTION MANUAL
+================================================================================
+
+PIPELINE ARCHITECTURE:
+- Two independent Kafka streams (topic_a: RAN reports, topic_b: MME events).
+- Normalization & validation with deterministic ID generation (SHA-256).
+- Payloads offloaded to Aerospike; lightweight ShadowEvents stored in RocksDB state.
+- Order-agnostic stateful correlation via keyBy(common_id) where common_id is IMSI.
+- Payload multi-get retrieval from Aerospike upon match and deep merge.
+- Final output published to Kafka topic 'merged_events'.
+- Multi-tier DLQ routing for validation, timeouts, Aerospike errors, and anomalies.
+
+--------------------------------------------------------------------------------
+TELECOM EVENT SCHEMAS (IMSI as correlation key):
+--------------------------------------------------------------------------------
+
+Topic A (RAN Measurement Report):
+  Timestamp: 10:15:34.123 UE: IMSI 123456789 Cell: LTE_5123 Event: Measurement Report RSRP: -95 dBm RSRQ: -12 dB Neighbor Cell: LTE_5124
+
+Topic B (MME Core Network Event):
+  Timestamp: 10:15:33.900 IMSI: 123456789 Procedure: Attach Request MME_ID: MME_01 TAI: Chennai_125 Result: Success
+
+Correlation Key (common_id):
+  123456789 (IMSI)
+
+================================================================================
+STEP 1: START INFRASTRUCTURE (DOCKER COMPOSE)
+================================================================================
+
+Open PowerShell in the project directory (c:\Users\2857155\Desktop\EOL_Final):
+
+    docker compose up -d
+    docker compose start
+
+Verify all containers are up and healthy:
+
+    docker compose ps
+
+Running Components:
+  - Kafka Broker (KRaft mode, Port 9092)
+  - Aerospike Cluster (Port 3000)
+  - Flink JobManager (Web UI: http://localhost:8081)
+  - Flink TaskManagers (2 replicas, 8 total task slots)
+
+================================================================================
+STEP 2: BUILD & PACKAGE (FAST WITH LOCAL CACHE)
+================================================================================
+
+Compile and package the shaded application JAR using the persistent cache:
+
+    docker run --rm -v "${PWD}:/app" -v maven-repo:/root/.m2 -w /app maven:3.9.6-eclipse-temurin-17 mvn package -DskipTests
+
+Output Fat JAR:
+    target/flink-event-correlation-1.0.0.jar
+
+================================================================================
+STEP 3: PROVISION KAFKA TOPICS
+================================================================================
+
+Create the 10 ingestion, egress, and DLQ topics:
+
+On Windows PowerShell:
+    .\scripts\create-topics.ps1
+
+On Linux / macOS / Bash:
+    ./scripts/create-topics.sh localhost:9092 12 1
+
+Topics:
+  - topic_a           (Source A: RAN Measurement Reports)
+  - topic_b           (Source B: MME Core Network Events)
+  - merged_events     (Sink: Final Correlated and Merged Events)
+  - shadow_events     (Sink: Lightweight Shadow Event Metadata)
+  - payload_events    (Sink: Full Raw Payload Event JSON)
+  - validation_dlq    (Malformed records / missing IMSI)
+  - aerospike_dlq     (Storage write failures after retries)
+  - correlation_dlq   (Unmatched events after timeout)
+  - payload_fetch_dlq (Missing Aerospike payload errors)
+  - processing_dlq    (Merge / execution anomalies)
+
+================================================================================
+STEP 4: SUBMIT STREAMING JOB TO FLINK CLUSTER
+================================================================================
+
+Submit the application to Flink JobManager:
+
+    docker exec flink-jobmanager ./bin/flink run -d -c com.company.flink.Application /opt/flink/project/target/flink-event-correlation-1.0.0.jar --kafka.bootstrap.servers kafka:29092 --aerospike.hosts aerospike:3000
+
+(Note: In WSL Ubuntu without Docker Desktop WSL-integration enabled, run `docker.exe` instead of `docker`)
+
+Check running jobs:
+
+    docker exec flink-jobmanager ./bin/flink list
+    # or in WSL: docker.exe exec flink-jobmanager ./bin/flink list
+
+Open the Flink Dashboard in your browser:
+    http://localhost:8081
+
+================================================================================
+STEP 5: RUN ASYNC HIGH-THROUGHPUT TELECOM STRESS TEST
+================================================================================
+
+Execute the interactive benchmark runner that prompts for EPS, Duration, and Event Payload Size, runs both producers concurrently, and reports E2E Joins/sec, Producer EPS rates, Average Latency (ms), and DLQ Failure counts:
+
+On Windows PowerShell:
+    .\scripts\run-all.ps1
+
+On Linux / macOS / WSL Ubuntu:
+    ./scripts/run-all.sh
+
+Or run the Native Java High-Throughput runner directly via Docker (5,000+ EPS at 5KB payload size):
+
+    docker exec -it flink-jobmanager java -cp /opt/flink/project/target/flink-event-correlation-1.0.0.jar com.company.flink.util.HighThroughputBenchmarkProducer 5000 30 5128 kafka:29092
+
+================================================================================
+STEP 6: MANUAL TELECOM INGESTION & SINK VERIFICATION
+================================================================================
+
+Open separate PowerShell windows to manually test the pipeline:
+
+Terminal 1: Start Consumers for Egress Topics:
+    - Consume Joined Merged Events:
+      .\scripts\consume-merged.ps1
+
+    - Consume Lightweight Shadow Events:
+        .\scripts\consume-shadow.ps1
+    - Consume Full Raw Payload Events:
+      .\scripts\consume-payload.ps1
+
+Terminal 2: Ingest Sample RAN Measurement Report into Topic A (with EPS, Duration, and Payload Size):
+    - Default (10 EPS, 5s duration, 256 bytes):
+      .\scripts\produce-topic-a.ps1
+
+    - Custom Rate & Size (100 EPS, 10s duration, 1024 bytes per event):
+      .\scripts\produce-topic-a.ps1 -EPS 100 -DurationSeconds 10 -EventSizeBytes 1024
+
+Terminal 3: Ingest Matching Sample MME Core Event into Topic B (with EPS, Duration, and Payload Size):
+    - Default (10 EPS, 5s duration, 256 bytes):
+      .\scripts\produce-topic-b.ps1
+
+    - Custom Rate & Size (100 EPS, 10s duration, 1024 bytes per event):
+      .\scripts\produce-topic-b.ps1 -EPS 100 -DurationSeconds 10 -EventSizeBytes 1024
+
+Expected Joined Output in Terminal 1:
+    123456789	{
+      "common_id": "123456789",
+      "payload_id_a": "499a892adfc5c87f609080fdcd833d1237efec379b429aefc8515039d74a57b0",
+      "payload_id_b": "1bca7582cc218616e65dec0b994d509d3c28f86c8b5b52b52e5e198e7c6e5975",
+      "merged_timestamp": 1788365033660,
+      "data": {
+        "IMSI": "123456789",
+        "UE": "IMSI 123456789",
+        "Cell": "LTE_5123",
+        "Event": "Measurement Report",
+        "RSRP": "-95 dBm",
+        "RSRQ": "-12 dB",
+        "Neighbor Cell": "LTE_5124",
+        "Procedure": "Attach Request",
+        "MME_ID": "MME_01",
+        "TAI": "Chennai_125",
+        "Result": "Success"
+      }
+    }
+
+================================================================================
+STEP 7: INSPECT DEAD LETTER QUEUES (DLQ)
+================================================================================
+
+Validation DLQ:
+    docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic validation_dlq --from-beginning
+
+Correlation Timeout DLQ:
+    docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic correlation_dlq --from-beginning
+
+Aerospike DLQ:
+    docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic aerospike_dlq --from-beginning
+
+================================================================================
+STEP 8: TEARDOWN & STOP SERVICES
+================================================================================
+
+Stop all running containers:
+
+    docker compose down
+
+Stop and remove all persistent volumes:
+
+    docker compose down -v
+================================================================================

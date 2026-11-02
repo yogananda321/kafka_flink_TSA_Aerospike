@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flink-config
+  labels:
+    app: flink
+data:
+  flink-conf.yaml: |+
+    jobmanager.rpc.address: flink-jobmanager
+    jobmanager.rpc.port: 6123
+    jobmanager.memory.process.size: 2048m
+    taskmanager.memory.process.size: 8192m
+    taskmanager.memory.managed.size: 3072m
+    taskmanager.numberOfTaskSlots: 8
+    parallelism.default: 16
+    state.backend: rocksdb
+    state.backend.incremental: true
+    state.backend.rocksdb.memory.managed: true
+    execution.checkpointing.interval: 30000
+    execution.checkpointing.mode: EXACTLY_ONCE
+    execution.checkpointing.timeout: 120000
+    execution.checkpointing.min-pause: 10000
+    execution.checkpointing.max-concurrent-checkpoints: 1
+    execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+    execution.checkpointing.unaligned.enabled: true
+    state.checkpoints.dir: s3://flink-checkpoints-prod/event-correlation
+    high-availability.type: kubernetes
+    high-availability.storageDir: s3://flink-ha-metadata-prod/event-correlation
+    restart-strategy: exponential-delay
+    restart-strategy.exponential-delay.initial-backoff: 1s
+    restart-strategy.exponential-delay.max-backoff: 30s

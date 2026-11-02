@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flink-taskmanager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flink
+      component: taskmanager
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: taskmanager
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: component
+                      operator: In
+                      values:
+                        - taskmanager
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: taskmanager
+          image: flink:1.19.1-java17
+          args: ["taskmanager"]
+          ports:
+            - containerPort: 6122
+              name: rpc
+          resources:
+            requests:
+              cpu: "2000m"
+              memory: "8192Mi"
+            limits:
+              cpu: "4000m"
+              memory: "10240Mi"
+          volumeMounts:
+            - name: flink-config-volume
+              mountPath: /opt/flink/conf
+      volumes:
+        - name: flink-config-volume
+          configMap:
+            name: flink-config
+            items:
+              - key: flink-conf.yaml
+                path: flink-conf.yaml

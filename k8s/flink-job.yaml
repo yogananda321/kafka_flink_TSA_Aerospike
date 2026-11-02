@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flink-job-submitter
+spec:
+  template:
+    metadata:
+      labels:
+        app: flink-submitter
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: job-submitter
+          image: my-registry.company.com/flink-event-correlation:1.0.0
+          command:
+            - "/opt/flink/bin/flink"
+            - "run"
+            - "-m"
+            - "flink-jobmanager:8081"
+            - "-c"
+            - "com.company.flink.Application"
+            - "/opt/flink/usrlib/flink-event-correlation.jar"

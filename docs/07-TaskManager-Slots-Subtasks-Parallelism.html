@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 — TaskManager, Task Slots, Subtasks and Parallelism</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@page {
+    size: A4;
+    margin: 2cm 2.2cm;
+}
+
+@media print {
+    body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    h2, h3, h4 { page-break-after: avoid; }
+    pre, table, blockquote { page-break-inside: avoid; }
+    .no-print { display: none !important; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: #1f2937;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: #ffffff;
+}
+
+/* ── Print Button ── */
+.print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    z-index: 1000;
+    transition: all 0.2s;
+}
+.print-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ── Headings ── */
+h1 {
+    font-size: 26pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 0;
+    margin-bottom: 4pt;
+    padding-bottom: 12pt;
+    border-bottom: 3pt solid #2563eb;
+}
+
+h1 + h2:first-of-type {
+    margin-top: 2pt;
+    color: #475569;
+    font-size: 14pt;
+    font-weight: 500;
+    border-bottom: none;
+    padding-bottom: 16pt;
+}
+
+h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #1e40af;
+    margin-top: 32pt;
+    margin-bottom: 12pt;
+    padding-bottom: 6pt;
+    border-bottom: 2pt solid #dbeafe;
+}
+
+h3 {
+    font-size: 12.5pt;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin-top: 20pt;
+    margin-bottom: 8pt;
+}
+
+h4 {
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 16pt;
+    margin-bottom: 6pt;
+}
+
+/* ── Paragraphs & Lists ── */
+p { margin-top: 5pt; margin-bottom: 9pt; orphans: 3; widows: 3; }
+ul, ol { margin-top: 5pt; margin-bottom: 9pt; padding-left: 22pt; }
+li { margin-bottom: 4pt; }
+strong { font-weight: 600; color: #111827; }
+em { font-style: italic; color: #4b5563; }
+
+/* ── Horizontal Rule ── */
+hr {
+    border: none;
+    border-top: 1.5pt solid #e5e7eb;
+    margin: 24pt 0;
+}
+
+/* ── Code ── */
+code {
+    font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 9.5pt;
+    background-color: #f1f5f9;
+    color: #be185d;
+    padding: 2pt 5pt;
+    border-radius: 4pt;
+    border: 0.5pt solid #e2e8f0;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    padding: 16pt 18pt;
+    border-radius: 8pt;
+    font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 9pt;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12pt 0 16pt 0;
+    border-left: 4pt solid #3b82f6;
+    white-space: pre;
+    overflow-wrap: normal;
+}
+
+pre code {
+    background: none;
+    color: #e2e8f0;
+    padding: 0;
+    border: none;
+    font-size: 9pt;
+}
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12pt 0 16pt 0;
+    font-size: 10pt;
+}
+
+thead { background-color: #1e40af; }
+
+th {
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 9pt 14pt;
+    border: 1pt solid #1e3a8a;
+}
+
+td {
+    padding: 8pt 14pt;
+    border: 1pt solid #e5e7eb;
+    vertical-align: top;
+}
+
+tr:nth-child(even) { background-color: #f8fafc; }
+tr:nth-child(odd) { background-color: #ffffff; }
+
+/* ── Blockquotes (callouts) ── */
+blockquote {
+    margin: 14pt 0;
+    padding: 14pt 18pt;
+    background-color: #eff6ff;
+    border-left: 4pt solid #3b82f6;
+    border-radius: 0 8pt 8pt 0;
+    color: #1e3a5f;
+    font-size: 10.5pt;
+}
+
+blockquote p { margin: 4pt 0; }
+blockquote strong { color: #1e40af; }
+blockquote table { margin: 8pt 0; }
+
+blockquote blockquote {
+    margin: 10pt 0;
+    border-left-color: #60a5fa;
+    background-color: #dbeafe;
+}
+
+/* ── Links ── */
+a { color: #2563eb; text-decoration: none; }
+
+/* ── TOC styling ── */
+.toc {
+    background-color: #f8fafc;
+    padding: 18pt;
+    border-radius: 8pt;
+    border: 1pt solid #e2e8f0;
+    margin-bottom: 24pt;
+}
+
+.toc ul { list-style-type: none; padding-left: 16pt; }
+.toc a { color: #1e40af; }
+</style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">⬇ Save as PDF</button>
+    <h1 id="chapter-7-taskmanager-task-slots-subtasks-and-parallelism">Chapter 7 — TaskManager, Task Slots, Subtasks and Parallelism</h1>
+<h2 id="detailed-execution-model">Detailed Execution Model</h2>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#7a-execution-hierarchy">7A. Execution Hierarchy</a></li>
+<li><a href="#7b-what-happens-when-parallelism-is-set">7B. What Happens When Parallelism Is Set</a></li>
+<li><a href="#7c-what-is-a-subtask">7C. What Is a Subtask</a></li>
+<li><a href="#7d-record-routing-and-partitioning">7D. Record Routing and Partitioning</a></li>
+<li><a href="#7e-what-is-a-task-slot">7E. What Is a Task Slot</a></li>
+<li><a href="#7f-subtask-to-slot-assignment">7F. Subtask-to-Slot Assignment</a></li>
+<li><a href="#7g-subtask--slot">7G. Subtask ≠ Slot</a></li>
+<li><a href="#7h-operator-chaining">7H. Operator Chaining</a></li>
+<li><a href="#7i-complete-example--2-tms--2-slots">7I. Complete Example — 2 TMs × 2 Slots</a></li>
+<li><a href="#7j-example-with-two-kafka-topics">7J. Example With Two Kafka Topics</a></li>
+<li><a href="#7k-effect-of-increasing-slots">7K. Effect of Increasing Slots</a></li>
+<li><a href="#7l-effect-of-increasing-parallelism">7L. Effect of Increasing Parallelism</a></li>
+<li><a href="#7m-cpu-cores-vs-task-slots">7M. CPU Cores vs Task Slots</a></li>
+<li><a href="#7n-why-slots-can-exceed-cpu-cores">7N. Why Slots Can Exceed CPU Cores</a></li>
+<li><a href="#7o-practical-slot-sizing">7O. Practical Slot Sizing</a></li>
+<li><a href="#7p-taskmanager-sizing">7P. TaskManager Sizing</a></li>
+<li><a href="#7q-parallelism-vs-slots--the-key-relationship">7Q. Parallelism vs Slots — The Key Relationship</a></li>
+<li><a href="#7r-complete-end-to-end-example">7R. Complete End-to-End Example</a></li>
+<li><a href="#7s-taskmanager-failure-recovery">7S. TaskManager Failure Recovery</a></li>
+<li><a href="#7t-taskmanager-failure-vs-server-failure">7T. TaskManager Failure vs Server Failure</a></li>
+<li><a href="#7u-recommended-mental-model">7U. Recommended Mental Model</a></li>
+<li><a href="#7v-the-five-equations-to-remember">7V. The Five Equations to Remember</a></li>
+</ul>
+<hr />
+<h2 id="7a-execution-hierarchy">7A. Execution Hierarchy</h2>
+<p>The relationship between <strong>TaskManager</strong>, <strong>Task Slot</strong>, <strong>Operator</strong>, <strong>Subtask</strong>, and <strong>Parallelism</strong> is one of the most important concepts in understanding how a Flink application actually executes.</p>
+<pre class="highlight"><code>Flink Cluster
+│
+├── JobManager
+│
+├── TaskManager 1
+│   ├── Slot 1
+│   ├── Slot 2
+│   ├── Slot 3
+│   └── Slot 4
+│
+├── TaskManager 2
+│   ├── Slot 1
+│   ├── Slot 2
+│   ├── Slot 3
+│   └── Slot 4
+│
+└── TaskManager 3
+    ├── Slot 1
+    ├── Slot 2
+    ├── Slot 3
+    └── Slot 4
+</code></pre>
+
+<blockquote>
+<p><strong>Core Principle:</strong>
+TaskManagers provide <strong>execution resources</strong>, slots provide <strong>scheduling capacity</strong>, and subtasks are the <strong>actual parallel instances</strong> of operators that execute using those resources.</p>
+</blockquote>
+<hr />
+<h2 id="7b-what-happens-when-parallelism-is-set">7B. What Happens When Parallelism Is Set</h2>
+<p>Consider an application with this pipeline:</p>
+<pre class="highlight"><code>Kafka Source → Normalize → Validate → Sink
+</code></pre>
+
+<p>When the application parallelism is set to <strong>4</strong>, Flink creates four parallel instances of <strong>each</strong> operator:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Subtask Instances</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td><code>Source-0</code>, <code>Source-1</code>, <code>Source-2</code>, <code>Source-3</code></td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td><code>Normalize-0</code>, <code>Normalize-1</code>, <code>Normalize-2</code>, <code>Normalize-3</code></td>
+</tr>
+<tr>
+<td>Validate</td>
+<td><code>Validate-0</code>, <code>Validate-1</code>, <code>Validate-2</code>, <code>Validate-3</code></td>
+</tr>
+<tr>
+<td>Sink</td>
+<td><code>Sink-0</code>, <code>Sink-1</code>, <code>Sink-2</code>, <code>Sink-3</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Formula:</strong></p>
+<pre class="highlight"><code>Subtasks per Operator = Operator Parallelism
+</code></pre>
+
+<p>For example, <code>P = 4</code> means <strong>4 subtasks</strong> for that operator.</p>
+<blockquote>
+<p><strong>⚠️ Common Misconceptions</strong></p>
+<table>
+<thead>
+<tr>
+<th>Incorrect Interpretation</th>
+<th>Correct Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parallelism 4 = 4 CPU cores</td>
+<td>Parallelism determines the number of parallel operator instances</td>
+</tr>
+<tr>
+<td>Parallelism 4 = 4 Task Slots</td>
+<td>The scheduler determines where subtasks execute</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="7c-what-is-a-subtask">7C. What Is a Subtask</h2>
+<ul>
+<li>An <strong>operator</strong> is the logical processing stage.</li>
+<li>A <strong>subtask</strong> is one <strong>parallel execution instance</strong> of that operator.</li>
+</ul>
+<p><strong>Example:</strong> Operator <code>Normalize</code> with <code>Parallelism = 4</code> creates:</p>
+<pre class="highlight"><code>Normalize
+ ├── Normalize-0
+ ├── Normalize-1
+ ├── Normalize-2
+ └── Normalize-3
+</code></pre>
+
+<p>Each subtask processes a <strong>portion</strong> of the incoming data. Instead of a single processor handling all records, Flink distributes the work:</p>
+<pre class="highlight"><code>Without parallelism:           With parallelism (P=4):
+
+    Normalize                       Normalize
+        |                               |
+   1 processor                ┌────┬────┼────┐
+                              ↓    ↓    ↓    ↓
+                             N-0  N-1  N-2  N-3
+</code></pre>
+
+<p>Four subtasks can process records <strong>concurrently</strong>.</p>
+<hr />
+<h2 id="7d-record-routing-and-partitioning">7D. Record Routing and Partitioning</h2>
+<p>What determines which subtask receives a record depends on the <strong>operator type</strong> and the <strong>partitioning strategy</strong>.</p>
+<h3 id="kafka-source-partitioning">Kafka Source Partitioning</h3>
+<p>For a Kafka source, <strong>Kafka partitions</strong> determine which source subtask receives records.</p>
+<table>
+<thead>
+<tr>
+<th>Kafka Partition</th>
+<th>Source Subtask</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partition 0</td>
+<td><code>Source-0</code></td>
+</tr>
+<tr>
+<td>Partition 1</td>
+<td><code>Source-1</code></td>
+</tr>
+<tr>
+<td>Partition 2</td>
+<td><code>Source-2</code></td>
+</tr>
+<tr>
+<td>Partition 3</td>
+<td><code>Source-3</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="highlight"><code>Kafka
+ ├── P0 ─────→ Source-0
+ ├── P1 ─────→ Source-1
+ ├── P2 ─────→ Source-2
+ └── P3 ─────→ Source-3
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> This assignment is <strong>not permanent</strong>. Kafka/Flink consumer assignment can change during rebalancing or recovery.</p>
+</blockquote>
+<h3 id="source-parallelism-upper-bound">Source Parallelism Upper Bound</h3>
+<pre class="highlight"><code>Useful Source Parallelism ≤ Kafka Partition Count
+</code></pre>
+
+<p>If Kafka has only <strong>4 partitions</strong> but source parallelism is set to <strong>8</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Subtask</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source-0</td>
+<td>✅ Active (partition assigned)</td>
+</tr>
+<tr>
+<td>Source-1</td>
+<td>✅ Active (partition assigned)</td>
+</tr>
+<tr>
+<td>Source-2</td>
+<td>✅ Active (partition assigned)</td>
+</tr>
+<tr>
+<td>Source-3</td>
+<td>✅ Active (partition assigned)</td>
+</tr>
+<tr>
+<td>Source-4</td>
+<td>❌ Idle (no partition)</td>
+</tr>
+<tr>
+<td>Source-5</td>
+<td>❌ Idle (no partition)</td>
+</tr>
+<tr>
+<td>Source-6</td>
+<td>❌ Idle (no partition)</td>
+</tr>
+<tr>
+<td>Source-7</td>
+<td>❌ Idle (no partition)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key Takeaway:</strong> Increasing source parallelism beyond the Kafka partition count <strong>does not</strong> create additional Kafka ingestion parallelism.</p>
+</blockquote>
+<hr />
+<h2 id="7e-what-is-a-task-slot">7E. What Is a Task Slot</h2>
+<p>A <strong>Task Slot</strong> is a <strong>resource/scheduling unit</strong> inside a TaskManager.</p>
+<pre class="highlight"><code>TaskManager
+│
+├── Slot 0
+├── Slot 1
+├── Slot 2
+└── Slot 3
+</code></pre>
+
+<p>This means the TaskManager has <strong>4 slots</strong> available for scheduling work.</p>
+<p><strong>Total Slot Calculation:</strong></p>
+<pre class="highlight"><code>Total Slots = TaskManager Count × Slots per TaskManager
+</code></pre>
+
+<p><strong>Example:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">TaskManagers</th>
+<th style="text-align: center;">Slots per TM</th>
+<th style="text-align: center;">Total Slots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><strong>8</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>⚠️ Critical Distinction — A slot is NOT:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Not a…</th>
+<th>A slot is…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU core</td>
+<td>A Flink <strong>scheduling/resource capacity</strong> unit</td>
+</tr>
+<tr>
+<td>Kafka partition</td>
+<td></td>
+</tr>
+<tr>
+<td>Operator</td>
+<td></td>
+</tr>
+<tr>
+<td>Subtask</td>
+<td></td>
+</tr>
+<tr>
+<td>Thread</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="7f-subtask-to-slot-assignment">7F. Subtask-to-Slot Assignment</h2>
+<p>The <strong>JobManager/Scheduler</strong> assigns subtasks to available slots.</p>
+<p><strong>Setup:</strong></p>
+<pre class="highlight"><code>2 TaskManagers × 2 Slots = 4 Total Slots
+</code></pre>
+
+<pre class="highlight"><code>TM1                    TM2
+├── Slot 1             ├── Slot 1
+└── Slot 2             └── Slot 2
+</code></pre>
+
+<p>For <code>Operator N</code> with <code>Parallelism = 4</code>, Flink creates subtasks <code>N0</code>, <code>N1</code>, <code>N2</code>, <code>N3</code>. The scheduler places them:</p>
+<pre class="highlight"><code>TM1                        TM2
+├── Slot 1 → N0            ├── Slot 1 → N2
+└── Slot 2 → N1            └── Slot 2 → N3
+</code></pre>
+
+<p><strong>Result:</strong> 4 subtasks → 4 available slots → distributed across 2 TaskManagers.</p>
+<hr />
+<h2 id="7g-subtask-slot">7G. Subtask ≠ Slot</h2>
+<blockquote>
+<p><strong>This is the most frequently misunderstood concept.</strong></p>
+</blockquote>
+<p><strong>Setup:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th style="text-align: center;">Parallelism</th>
+<th style="text-align: center;">Subtasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>6</strong></td>
+</tr>
+</tbody>
+</table>
+<p>This does <strong>not</strong> automatically mean 6 Task Slots are required.</p>
+<p><strong>Why?</strong> Because compatible operators can be <strong>chained</strong>, and <strong>slot sharing</strong> allows multiple operators to execute within the same scheduling allocation.</p>
+<pre class="highlight"><code>Chain 0 (Slot 1):                Chain 1 (Slot 2):
+
+  Source-0                         Source-1
+     ↓                                ↓
+  Normalize-0                      Normalize-1
+     ↓                                ↓
+  Validate-0                       Validate-1
+</code></pre>
+
+<p><strong>Result:</strong></p>
+<pre class="highlight"><code>6 operator subtasks  →  2 execution chains  →  2 slots
+</code></pre>
+
+<blockquote>
+<p><strong>Key Insight:</strong> Counting operator subtasks and counting slots are <strong>not the same thing</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="7h-operator-chaining">7H. Operator Chaining</h2>
+<p>Consider <code>Source → Normalize → Validate</code> with <code>Parallelism = 2</code> for all operators.</p>
+<p><strong>Without chaining</strong> — each operator passes data over the network:</p>
+<pre class="highlight"><code>Source
+ ↓ ← network serialization/deserialization
+Normalize
+ ↓ ← network serialization/deserialization
+Validate
+</code></pre>
+
+<p><strong>With chaining</strong> — operators execute within the same task, passing data via method calls:</p>
+<pre class="highlight"><code>Chain 0:                          Chain 1:
+Source-0 → Normalize-0 → Validate-0    Source-1 → Normalize-1 → Validate-1
+</code></pre>
+
+<p>Chaining <strong>reduces unnecessary network communication and serialization</strong> between compatible operators, executing them as a single fused task.</p>
+<hr />
+<h2 id="7i-complete-example-2-tms-2-slots">7I. Complete Example — 2 TMs × 2 Slots</h2>
+<p><strong>Infrastructure:</strong></p>
+<pre class="highlight"><code>TaskManager Count = 2
+Slots per TM     = 2
+Total Slots      = 2 × 2 = 4
+</code></pre>
+
+<pre class="highlight"><code>                 JobManager
+                      |
+          ┌───────────┴───────────┐
+          ↓                       ↓
+       TaskManager 1          TaskManager 2
+       ┌───────────┐          ┌───────────┐
+       │ Slot 1    │          │ Slot 1    │
+       │ Slot 2    │          │ Slot 2    │
+       └───────────┘          └───────────┘
+</code></pre>
+
+<p><strong>Pipeline:</strong> <code>N → M → O</code> with <code>Parallelism = 2</code></p>
+<p>Flink creates: <code>N0</code>, <code>N1</code>, <code>M0</code>, <code>M1</code>, <code>O0</code>, <code>O1</code></p>
+<p><strong>With chaining:</strong></p>
+<pre class="highlight"><code>TM1
+├── Slot 1:  N0 → M0 → O0
+└── Slot 2:  N1 → M1 → O1
+
+TM2
+├── Slot 1:  (empty)
+└── Slot 2:  (empty)
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> Flink does <strong>not</strong> have to use every available slot. TM2 might have no work assigned for this particular job.</p>
+</blockquote>
+<hr />
+<h2 id="7j-example-with-two-kafka-topics">7J. Example With Two Kafka Topics</h2>
+<p><strong>Kafka Setup:</strong></p>
+<pre class="highlight"><code>Topic A                    Topic B
+├── Partition A0           ├── Partition B0
+└── Partition A1           └── Partition B1
+</code></pre>
+
+<p><strong>Flink Setup:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: center;">Parallelism</th>
+<th style="text-align: center;">Subtasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source A</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Source B</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>4</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>With 2 TaskManagers × 2 Slots = 4 Slots:</strong></p>
+<pre class="highlight"><code>TM1                                TM2
+├── Slot 1 → A-Source-0            ├── Slot 1 → A-Source-1
+└── Slot 2 → B-Source-0            └── Slot 2 → B-Source-1
+</code></pre>
+
+<blockquote>
+<p>This is a conceptual placement. The actual scheduler determines the final assignment.</p>
+</blockquote>
+<hr />
+<h2 id="7k-effect-of-increasing-slots">7K. Effect of Increasing Slots</h2>
+<p><strong>Before:</strong></p>
+<pre class="highlight"><code>2 TMs × 2 Slots = 4 Total Slots
+</code></pre>
+
+<p><strong>After:</strong></p>
+<pre class="highlight"><code>2 TMs × 4 Slots = 8 Total Slots
+</code></pre>
+
+<p>But if Kafka still has:
+- Topic A → 2 partitions
+- Topic B → 2 partitions
+- Source parallelism → A=2, B=2</p>
+<p>Then there are still only <strong>4 active source subtasks</strong>.</p>
+<blockquote>
+<p><strong>Key Insight:</strong>
+8 slots does <strong>not</strong> automatically mean 8 Kafka consumers processing 8 partitions. There are only 4 Kafka partitions. The additional slots provide <strong>capacity/headroom</strong> for other parallel operators, jobs, or downstream work.</p>
+</blockquote>
+<hr />
+<h2 id="7l-effect-of-increasing-parallelism">7L. Effect of Increasing Parallelism</h2>
+<p>Now increase Kafka partitions <strong>and</strong> source parallelism:</p>
+<pre class="highlight"><code>Topic A: A0, A1, A2, A3    (4 partitions)
+Topic B: B0, B1, B2, B3    (4 partitions)
+
+Source A Parallelism = 4
+Source B Parallelism = 4
+Total Source Subtasks = 4 + 4 = 8
+</code></pre>
+
+<p><strong>With 2 TMs × 4 Slots = 8 Slots</strong>, resources and parallelism are now aligned:</p>
+<pre class="highlight"><code>TM1                            TM2
+├── Slot 1 → A0                ├── Slot 1 → A2
+├── Slot 2 → A1                ├── Slot 2 → A3
+├── Slot 3 → B0                ├── Slot 3 → B2
+└── Slot 4 → B1                └── Slot 4 → B3
+</code></pre>
+
+<blockquote>
+<p>This is an illustrative placement, not a permanent assignment.</p>
+</blockquote>
+<hr />
+<h2 id="7m-cpu-cores-vs-task-slots">7M. CPU Cores vs Task Slots</h2>
+<p>Suppose one TaskManager has <strong>8 CPU cores</strong> and is configured with <strong>8 slots</strong>.</p>
+<p>A reasonable starting point for CPU-heavy workloads:</p>
+<pre class="highlight"><code>Slots ≈ CPU Cores
+</code></pre>
+
+<p>But this is <strong>not</strong> a Flink law.</p>
+<blockquote>
+<p><strong>⚠️ Slots do NOT map 1:1 to CPU cores:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Incorrect Model</th>
+<th>Correct Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slot 1 = CPU Core 1</td>
+<td>Slots = Flink scheduling capacity</td>
+</tr>
+<tr>
+<td>Slot 2 = CPU Core 2</td>
+<td>OS/JVM executes work on CPU threads</td>
+</tr>
+<tr>
+<td>…</td>
+<td>Thread scheduling is independent</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<hr />
+<h2 id="7n-why-slots-can-exceed-cpu-cores">7N. Why Slots Can Exceed CPU Cores</h2>
+<p>Consider an I/O-heavy pipeline:</p>
+<pre class="highlight"><code>Kafka → Normalize → Validate → Aerospike Async I/O → Merge
+</code></pre>
+
+<p>The Aerospike operation spends significant time <strong>waiting for network I/O</strong>:</p>
+<pre class="highlight"><code>CPU work
+  ↓
+Send request to Aerospike
+  ↓
+  WAIT  ← CPU is idle during this phase
+  ↓
+Response arrives
+  ↓
+CPU work
+</code></pre>
+
+<p>During the wait, the CPU does <strong>not</strong> need to remain busy executing that operation. Therefore, I/O-heavy workloads may benefit from <strong>more slots than CPU cores</strong>.</p>
+<p><strong>Benchmarking approach for an 8-core machine:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Configuration</th>
+<th>Metrics to Monitor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">8 slots</td>
+<td>CPU utilization, throughput, latency</td>
+</tr>
+<tr>
+<td style="text-align: center;">12 slots</td>
+<td>Kafka consumer lag, Flink backpressure</td>
+</tr>
+<tr>
+<td style="text-align: center;">16 slots</td>
+<td>Aerospike latency, network utilization, memory, GC</td>
+</tr>
+</tbody>
+</table>
+<p>The optimal value is determined <strong>experimentally</strong>.</p>
+<hr />
+<h2 id="7o-practical-slot-sizing">7O. Practical Slot Sizing</h2>
+<p>There is <strong>no universal formula</strong>. A useful starting model:</p>
+<pre class="highlight"><code>S ≈ C / R
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">S</td>
+<td>Number of slots</td>
+</tr>
+<tr>
+<td style="text-align: center;">C</td>
+<td>CPU cores allocated to the TaskManager</td>
+</tr>
+<tr>
+<td style="text-align: center;">R</td>
+<td>Desired CPU capacity per slot</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Cores</th>
+<th style="text-align: center;">CPU per Slot (R)</th>
+<th style="text-align: center;">Calculated Slots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">32</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Caution:</strong> A higher slot count is not always better. Memory, network, external-system concurrency, and workload characteristics constrain the practical value.</p>
+</blockquote>
+<hr />
+<h2 id="7p-taskmanager-sizing">7P. TaskManager Sizing</h2>
+<p><strong>Formula:</strong></p>
+<pre class="highlight"><code>Total Slots = TM Count × Slots per TM
+</code></pre>
+
+<p><strong>Example:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">TM Count</th>
+<th style="text-align: center;">Slots per TM</th>
+<th style="text-align: center;">Total Slots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"><strong>32</strong></td>
+</tr>
+</tbody>
+</table>
+<p>If the application requires approximately <strong>24 execution slots</strong>:</p>
+<pre class="highlight"><code>TM1 → 8 slots
+TM2 → 8 slots
+TM3 → 8 slots
+TM4 → 8 slots
+─────────────
+Total: 32 slots (4 spare slots of capacity)
+</code></pre>
+
+<hr />
+<h2 id="7q-parallelism-vs-slots-the-key-relationship">7Q. Parallelism vs Slots — The Key Relationship</h2>
+<p><strong>Setup:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th style="text-align: center;">Parallelism</th>
+<th style="text-align: center;">Subtasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td>Sink</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>16</strong></td>
+</tr>
+</tbody>
+</table>
+<p>If all four operators can be <strong>chained</strong>:</p>
+<pre class="highlight"><code>Chain 0: Source-0 → Normalize-0 → Validate-0 → Sink-0
+Chain 1: Source-1 → Normalize-1 → Validate-1 → Sink-1
+Chain 2: Source-2 → Normalize-2 → Validate-2 → Sink-2
+Chain 3: Source-3 → Normalize-3 → Validate-3 → Sink-3
+</code></pre>
+
+<p><strong>Result:</strong> ~4 parallel execution chains rather than 16 independent slots.</p>
+<p><strong>The correct mental model:</strong></p>
+<pre class="highlight"><code>Parallelism
+     ↓
+Number of subtasks
+     ↓
+Chaining / slot sharing
+     ↓
+Execution chains / scheduling requirements
+     ↓
+TaskManager slots
+</code></pre>
+
+<blockquote>
+<p>This is far more accurate than the naive model: <code>1 subtask = 1 slot</code>.</p>
+</blockquote>
+<hr />
+<h2 id="7r-complete-end-to-end-example">7R. Complete End-to-End Example</h2>
+<h3 id="infrastructure">Infrastructure</h3>
+<pre class="highlight"><code>TaskManagers: 2
+Slots per TM: 2
+Total Slots:  2 × 2 = 4
+</code></pre>
+
+<h3 id="kafka">Kafka</h3>
+<pre class="highlight"><code>Topic A → 2 partitions (A0, A1)
+Topic B → 2 partitions (B0, B1)
+</code></pre>
+
+<h3 id="flink-pipeline">Flink Pipeline</h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th style="text-align: center;">Parallelism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source A</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Source B</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Correlation</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Sink</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="logical-graph">Logical Graph</h3>
+<pre class="highlight"><code>      Topic A                 Topic B
+       A0 A1                   B0 B1
+        ↓  ↓                    ↓  ↓
+      Source A                Source B
+       P=2                      P=2
+          \                     /
+           \                   /
+            Normalize  P=2
+                  ↓
+            Validate   P=2
+                  ↓
+           Correlation P=2
+                  ↓
+               Sink    P=2
+</code></pre>
+
+<h3 id="subtask-count">Subtask Count</h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th style="text-align: center;">Subtasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source A</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Source B</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Normalize</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Correlation</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td>Sink</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: center;"><strong>12</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="with-chaining-and-slot-sharing">With Chaining and Slot Sharing</h3>
+<p>These 12 logical subtasks do <strong>not</strong> require 12 slots. A possible execution structure:</p>
+<pre class="highlight"><code>Slot 1:                        Slot 2:
+  Source-A-0                     Source-A-1
+     ↓                              ↓
+  Normalize-0                    Normalize-1
+     ↓                              ↓
+  Validate-0                     Validate-1
+     ↓                              ↓
+  Correlation-0                  Correlation-1
+     ↓                              ↓
+  Sink-0                          Sink-1
+</code></pre>
+
+<p>Source B's processing is placed according to the actual execution graph, slot-sharing groups, and scheduling constraints. The <strong>JobManager's scheduler</strong> determines the actual placement.</p>
+<hr />
+<h2 id="7s-taskmanager-failure-recovery">7S. TaskManager Failure Recovery</h2>
+<p><strong>Setup:</strong></p>
+<pre class="highlight"><code>TM1                           TM2
+├── Slot 1 → Chain 0          ├── Slot 1 → Chain 2
+└── Slot 2 → Chain 1          └── Slot 2 → Chain 3
+</code></pre>
+
+<p><strong>When TM1 fails (❌):</strong></p>
+<p>The subtasks running on TM1 are lost. Flink's recovery process:</p>
+<pre class="highlight"><code>Checkpoint (consistent state snapshot)
+     ↓
+TM1 failure detected
+     ↓
+Job restart / recovery triggered
+     ↓
+State restored from checkpoint
+     ↓
+Subtasks recreated on available TaskManagers
+     ↓
+Processing continues
+</code></pre>
+
+<blockquote>
+<p>This is one reason why <strong>slots are not permanent homes</strong> for subtasks.</p>
+</blockquote>
+<hr />
+<h2 id="7t-taskmanager-failure-vs-server-failure">7T. TaskManager Failure vs Server Failure</h2>
+<p>This distinction is critical for <strong>production architecture</strong>.</p>
+<h3 id="single-server-single-taskmanager">Single Server, Single TaskManager</h3>
+<pre class="highlight"><code>Server 1
+└── TM1
+</code></pre>
+
+<ul>
+<li>If <code>TM1</code> crashes → Flink can potentially restart/redeploy it.</li>
+<li>If <code>Server 1</code> crashes → TaskManager is also gone.</li>
+</ul>
+<h3 id="multiple-servers-recommended">Multiple Servers (Recommended)</h3>
+<pre class="highlight"><code>Server 1 → TM1
+Server 2 → TM2
+Server 3 → TM3
+</code></pre>
+
+<p>If <code>Server 2</code> fails:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TM1</td>
+<td>✅ Available</td>
+</tr>
+<tr>
+<td>TM2</td>
+<td>❌ Lost</td>
+</tr>
+<tr>
+<td>TM3</td>
+<td>✅ Available</td>
+</tr>
+</tbody>
+</table>
+<p>This provides actual <strong>machine-level failure isolation</strong>.</p>
+<hr />
+<h2 id="7u-recommended-mental-model">7U. Recommended Mental Model</h2>
+<pre class="highlight"><code>                   JOB
+                    │
+                    ▼
+               PARALLELISM
+                    │
+                    ▼
+             creates SUBTASKS
+                    │
+                    ▼
+         ┌──────────┴──────────┐
+         │                     │
+      Subtask 0             Subtask 1
+         │                     │
+         ▼                     ▼
+    Scheduler              Scheduler
+         │                     │
+         └──────────┬──────────┘
+                    ▼
+                TASK SLOTS
+                    │
+         ┌──────────┴──────────┐
+         ▼                     ▼
+     TaskManager 1         TaskManager 2
+</code></pre>
+
+<blockquote>
+<p><strong>In one sentence:</strong>
+Parallelism determines how many subtasks Flink creates; the scheduler places those subtasks into available TaskManager slots; TaskManagers provide the actual runtime resources needed to execute them.</p>
+</blockquote>
+<hr />
+<h2 id="7v-the-five-equations-to-remember">7V. The Five Equations to Remember</h2>
+<h3 id="1-total-slots">1. Total Slots</h3>
+<pre class="highlight"><code>S_total = TM_count × S_per_TM
+</code></pre>
+
+<p><em>Example: 4 × 8 = 32 total slots</em></p>
+<h3 id="2-subtasks-per-operator">2. Subtasks per Operator</h3>
+<pre class="highlight"><code>N_subtasks = P_operator
+</code></pre>
+
+<p><em>Example: P = 8 → 8 subtasks</em></p>
+<h3 id="3-source-parallelism-bound">3. Source Parallelism Bound</h3>
+<pre class="highlight"><code>P_source ≤ N_kafka_partitions
+</code></pre>
+
+<p><em>Kafka partitions bound the number of simultaneously active source partition assignments in a consumer group.</em></p>
+<h3 id="4-approximate-slot-sizing">4. Approximate Slot Sizing</h3>
+<pre class="highlight"><code>S ≈ C / R
+</code></pre>
+
+<p><em>Where C = CPU capacity, R = desired CPU capacity per slot.</em>
+<em>This is a starting point, not a mandatory formula.</em></p>
+<h3 id="5-logical-subtask-count">5. Logical Subtask Count</h3>
+<pre class="highlight"><code>N_logical_subtasks = Σ P_i    (for operators O₁, O₂, …, Oₙ)
+</code></pre>
+
+<blockquote>
+<p><strong>But critically:</strong>
+<code>N_logical_subtasks ≠ N_required_slots</code>
+Because operator chaining and slot sharing affect how execution is scheduled.</p>
+</blockquote>
+<hr />
+<h2 id="final-practical-picture">Final Practical Picture</h2>
+<p>For the <strong>event-correlation architecture</strong>, the full hierarchy:</p>
+<pre class="highlight"><code>                    FLINK JOB
+                         │
+                         ▼
+                 Execution Graph
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+         Parallelism            Parallelism
+              │                     │
+              ▼                     ▼
+        Source subtasks       Correlation subtasks
+              │                     │
+              └──────────┬──────────┘
+                         ▼
+                    Scheduler
+                         │
+              assigns execution to
+                         │
+                         ▼
+                   TASK SLOTS
+                         │
+             ┌───────────┼───────────┐
+             ▼           ▼           ▼
+            TM1         TM2         TM3
+             │           │           │
+          CPU/RAM     CPU/RAM     CPU/RAM
+             │           │           │
+             └───────────┼───────────┘
+                         ▼
+                  Actual processing
+                         │
+                         ▼
+              Kafka / Aerospike / Sink
+</code></pre>
+
+<p><strong>The key conceptual chain:</strong></p>
+<pre class="highlight"><code>Kafka partitions → Source parallelism → Subtasks → Scheduler → TaskManager slots → CPU/Memory/Network → Actual processing
+</code></pre>
+
+<blockquote>
+<p>[!CAUTION]
+<strong>Do not</strong> design a Flink cluster by saying <em>"I have 16 CPU cores, therefore I need 16 slots."</em></p>
+<p>Instead:
+1. Treat slots as Flink <strong>scheduling capacity</strong>
+2. Choose an initial slot/CPU configuration
+3. <strong>Validate experimentally</strong> using: throughput, CPU utilization, backpressure, latency, memory, network, Kafka lag, and — particularly for this architecture — <strong>Aerospike I/O concurrency</strong></p>
+</blockquote>
+<hr />
+<p><em>End of Chapter 7</em></p>
+    <script>
+        // Auto-trigger print dialog for PDF generation
+        // window.print();
+    </script>
+</body>
+</html>

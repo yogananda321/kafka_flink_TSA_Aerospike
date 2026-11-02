@@ -1,0 +1,702 @@
+100 eps , 60 sec
+
+1kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 6000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 6000 (98.89 EPS)
+  Source B Events Produced         : 6000 (98.89 EPS)
+  Joined & Merged Events Received  : 6000 (100.00% Join Success)
+  Effective Joins Per Second       : 98.05 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=878.71 | P50=530.0 | P95=3406.0 | P99=5027.0 | P99.9=5788.0 | MAX=6247.0
+  Correlation Latency (ms)         : Avg=375.92 | P50=30.0 | P95=2890.0 | P99=4514.0 | P99.9=5288.0 | MAX=5746.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=100 actual_eps_a=98.89 actual_eps_b=98.89 actual_combined_eps=197.78 merged_events=6000 effective_jps=98.05 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=878.71 p50_ms=530.00 p95_ms=3406.00 p99_ms=5027.00 p99_9_ms=5788.00 max_e2e_ms=6247.00 avg_corr_ms=375.92 corr_p50=30.00 corr_p95=2890.00 corr_p99=4514.00 corr_p99_9=5288.00 corr_max=5746.00
+
+2kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 6000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 6000 (98.94 EPS)
+  Source B Events Produced         : 6000 (98.94 EPS)
+  Joined & Merged Events Received  : 6000 (100.00% Join Success)
+  Effective Joins Per Second       : 98.09 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=736.73 | P50=565.0 | P95=1373.0 | P99=1806.0 | P99.9=2025.0 | MAX=2186.0
+  Correlation Latency (ms)         : Avg=231.54 | P50=63.0 | P95=856.0 | P99=1299.0 | P99.9=1519.0 | MAX=1679.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=100 actual_eps_a=98.94 actual_eps_b=98.94 actual_combined_eps=197.89 merged_events=6000 effective_jps=98.09 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=736.73 p50_ms=565.00 p95_ms=1373.00 p99_ms=1806.00 p99_9_ms=2025.00 max_e2e_ms=2186.00 avg_corr_ms=231.54 corr_p50=63.00 corr_p95=856.00 corr_p99=1299.00 corr_p99_9=1519.00 corr_max=1679.00
+======================================================================
+
+
+5KB
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 6000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 6000 (98.71 EPS)
+  Source B Events Produced         : 6000 (98.71 EPS)
+  Joined & Merged Events Received  : 6000 (100.00% Join Success)
+  Effective Joins Per Second       : 97.87 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=550.65 | P50=529.0 | P95=630.0 | P99=1024.0 | P99.9=1428.0 | MAX=1554.0
+  Correlation Latency (ms)         : Avg=49.37 | P50=29.0 | P95=124.0 | P99=521.0 | P99.9=928.0 | MAX=1053.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=100 actual_eps_a=98.71 actual_eps_b=98.71 actual_combined_eps=197.42 merged_events=6000 effective_jps=97.87 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=550.65 p50_ms=529.00 p95_ms=630.00 p99_ms=1024.00 p99_9_ms=1428.00 max_e2e_ms=1554.00 avg_corr_ms=49.37 corr_p50=29.00 corr_p95=124.00 corr_p99=521.00 corr_p99_9=928.00 corr_max=1053.00
+======================================================================
+
+
+10kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 6000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 6000 (98.99 EPS)
+  Source B Events Produced         : 6000 (98.99 EPS)
+  Joined & Merged Events Received  : 6000 (100.00% Join Success)
+  Effective Joins Per Second       : 98.13 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=567.12 | P50=535.0 | P95=691.0 | P99=1285.0 | P99.9=1804.0 | MAX=1868.0
+  Correlation Latency (ms)         : Avg=65.78 | P50=34.0 | P95=181.0 | P99=783.0 | P99.9=1303.0 | MAX=1368.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=100 actual_eps_a=98.99 actual_eps_b=98.99 actual_combined_eps=197.98 merged_events=6000 effective_jps=98.13 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=567.12 p50_ms=535.00 p95_ms=691.00 p99_ms=1285.00 p99_9_ms=1804.00 max_e2e_ms=1868.00 avg_corr_ms=65.78 corr_p50=34.00 corr_p95=181.00 corr_p99=783.00 corr_p99_9=1303.00 corr_max=1368.00
+======================================================================
+
+
+15kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 6000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 6000 (98.92 EPS)
+  Source B Events Produced         : 6000 (98.92 EPS)
+  Joined & Merged Events Received  : 6000 (100.00% Join Success)
+  Effective Joins Per Second       : 98.01 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=565.41 | P50=537.0 | P95=695.0 | P99=1141.0 | P99.9=1450.0 | MAX=1602.0
+  Correlation Latency (ms)         : Avg=64.29 | P50=37.0 | P95=187.0 | P99=633.0 | P99.9=944.0 | MAX=1101.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=100 actual_eps_a=98.92 actual_eps_b=98.92 actual_combined_eps=197.85 merged_events=6000 effective_jps=98.01 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=565.41 p50_ms=537.00 p95_ms=695.00 p99_ms=1141.00 p99_9_ms=1450.00 max_e2e_ms=1602.00 avg_corr_ms=64.29 corr_p50=37.00 corr_p95=187.00 corr_p99=633.00 corr_p99_9=944.00 corr_max=1101.00
+======================================================================
+
+
+200eps, 60 sec
+
+1 kb 
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 12000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 12000 (198.05 EPS)
+  Source B Events Produced         : 12000 (198.05 EPS)
+  Joined & Merged Events Received  : 12000 (100.00% Join Success)
+  Effective Joins Per Second       : 196.35 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=546.86 | P50=527.0 | P95=625.0 | P99=1009.0 | P99.9=1311.0 | MAX=1428.0
+  Correlation Latency (ms)         : Avg=45.89 | P50=27.0 | P95=122.0 | P99=509.0 | P99.9=810.0 | MAX=927.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=200 actual_eps_a=198.05 actual_eps_b=198.05 actual_combined_eps=396.09 merged_events=12000 effective_jps=196.35 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=546.86 p50_ms=527.00 p95_ms=625.00 p99_ms=1009.00 p99_9_ms=1311.00 max_e2e_ms=1428.00 avg_corr_ms=45.89 corr_p50=27.00 corr_p95=122.00 corr_p99=509.00 corr_p99_9=810.00 corr_max=927.00
+======================================================================
+
+
+2kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 12000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 12000 (197.83 EPS)
+  Source B Events Produced         : 12000 (197.83 EPS)
+  Joined & Merged Events Received  : 12000 (100.00% Join Success)
+  Effective Joins Per Second       : 196.14 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=543.16 | P50=527.0 | P95=601.0 | P99=973.0 | P99.9=1317.0 | MAX=1418.0
+  Correlation Latency (ms)         : Avg=42.41 | P50=26.0 | P95=96.0 | P99=473.0 | P99.9=817.0 | MAX=915.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=200 actual_eps_a=197.83 actual_eps_b=197.83 actual_combined_eps=395.65 merged_events=12000 effective_jps=196.14 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=543.16 p50_ms=527.00 p95_ms=601.00 p99_ms=973.00 p99_9_ms=1317.00 max_e2e_ms=1418.00 avg_corr_ms=42.41 corr_p50=26.00 corr_p95=96.00 corr_p99=473.00 corr_p99_9=817.00 corr_max=915.00
+======================================================================
+
+
+5KB
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 12000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 12000 (198.03 EPS)
+  Source B Events Produced         : 12000 (198.03 EPS)
+  Joined & Merged Events Received  : 11670 (97.25% Join Success)
+  Effective Joins Per Second       : 156.55 joins/sec
+  Missing Pairs / Data Loss        : 330 (2.75%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=622.65 | P50=533.0 | P95=1243.0 | P99=2399.0 | P99.9=2858.0 | MAX=3127.0
+  Correlation Latency (ms)         : Avg=121.75 | P50=33.0 | P95=742.0 | P99=1899.0 | P99.9=2356.0 | MAX=2626.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=200 actual_eps_a=198.03 actual_eps_b=198.03 actual_combined_eps=396.07 merged_events=11670 effective_jps=156.55 join_success_pct=97.25 missing_pairs=330 data_loss_pct=2.75 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=622.65 p50_ms=533.00 p95_ms=1243.00 p99_ms=2399.00 p99_9_ms=2858.00 max_e2e_ms=3127.00 avg_corr_ms=121.75 corr_p50=33.00 corr_p95=742.00 corr_p99=1899.00 corr_p99_9=2356.00 corr_max=2626.00
+
+
+10kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 12000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 12000 (198.01 EPS)
+  Source B Events Produced         : 12000 (198.01 EPS)
+  Joined & Merged Events Received  : 12000 (100.00% Join Success)
+  Effective Joins Per Second       : 196.26 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=551.64 | P50=529.0 | P95=661.0 | P99=1036.0 | P99.9=1333.0 | MAX=1406.0
+  Correlation Latency (ms)         : Avg=50.78 | P50=29.0 | P95=158.0 | P99=535.0 | P99.9=833.0 | MAX=906.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=200 actual_eps_a=198.01 actual_eps_b=198.01 actual_combined_eps=396.01 merged_events=12000 effective_jps=196.26 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=551.64 p50_ms=529.00 p95_ms=661.00 p99_ms=1036.00 p99_9_ms=1333.00 max_e2e_ms=1406.00 avg_corr_ms=50.78 corr_p50=29.00 corr_p95=158.00 corr_p99=535.00 corr_p99_9=833.00 corr_max=906.00
+======================================================================
+
+
+
+15kb
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 12000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 12000 (197.99 EPS)
+  Source B Events Produced         : 12000 (197.99 EPS)
+  Joined & Merged Events Received  : 12000 (100.00% Join Success)
+  Effective Joins Per Second       : 196.21 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=3659.98 | P50=3021.0 | P95=9626.0 | P99=11506.0 | P99.9=12959.0 | MAX=13405.0
+  Correlation Latency (ms)         : Avg=3155.68 | P50=2516.0 | P95=9115.0 | P99=11005.0 | P99.9=12446.0 | MAX=12904.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=200 actual_eps_a=197.99 actual_eps_b=197.99 actual_combined_eps=395.99 merged_events=12000 effective_jps=196.21 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=3659.98 p50_ms=3021.00 p95_ms=9626.00 p99_ms=11506.00 p99_9_ms=12959.00 max_e2e_ms=13405.00 avg_corr_ms=3155.68 corr_p50=2516.00 corr_p95=9115.00 corr_p99=11005.00 corr_p99_9=12446.00 corr_max=12904.00
+======================================================================
+
+
+500 eps , 60 sec
+
+1kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 30000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 30000 (494.82 EPS)
+  Source B Events Produced         : 30000 (494.82 EPS)
+  Joined & Merged Events Received  : 30000 (100.00% Join Success)
+  Effective Joins Per Second       : 490.60 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=572.83 | P50=528.0 | P95=850.0 | P99=1189.0 | P99.9=1433.0 | MAX=1549.0
+  Correlation Latency (ms)         : Avg=71.69 | P50=28.0 | P95=348.0 | P99=687.0 | P99.9=933.0 | MAX=1045.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=500 actual_eps_a=494.82 actual_eps_b=494.82 actual_combined_eps=989.64 merged_events=30000 effective_jps=490.60 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=572.83 p50_ms=528.00 p95_ms=850.00 p99_ms=1189.00 p99_9_ms=1433.00 max_e2e_ms=1549.00 avg_corr_ms=71.69 corr_p50=28.00 corr_p95=348.00 corr_p99=687.00 corr_p99_9=933.00 corr_max=1045.00
+======================================================================
+
+
+2kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 30000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 30000 (494.94 EPS)
+  Source B Events Produced         : 30000 (494.94 EPS)
+  Joined & Merged Events Received  : 30000 (100.00% Join Success)
+  Effective Joins Per Second       : 485.21 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=632.68 | P50=527.0 | P95=1123.0 | P99=2829.0 | P99.9=3275.0 | MAX=3395.0
+  Correlation Latency (ms)         : Avg=131.88 | P50=27.0 | P95=621.0 | P99=2329.0 | P99.9=2769.0 | MAX=2894.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=500 actual_eps_a=494.94 actual_eps_b=494.94 actual_combined_eps=989.87 merged_events=30000 effective_jps=485.21 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=632.68 p50_ms=527.00 p95_ms=1123.00 p99_ms=2829.00 p99_9_ms=3275.00 max_e2e_ms=3395.00 avg_corr_ms=131.88 corr_p50=27.00 corr_p95=621.00 corr_p99=2329.00 corr_p99_9=2769.00 corr_max=2894.00
+======================================================================
+
+
+
+5KB
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 30000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 30000 (495.01 EPS)
+  Source B Events Produced         : 30000 (495.01 EPS)
+  Joined & Merged Events Received  : 30000 (100.00% Join Success)
+  Effective Joins Per Second       : 490.72 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=657.83 | P50=541.0 | P95=1180.0 | P99=2037.0 | P99.9=2589.0 | MAX=2962.0
+  Correlation Latency (ms)         : Avg=156.22 | P50=40.0 | P95=677.0 | P99=1535.0 | P99.9=2087.0 | MAX=2458.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=500 actual_eps_a=495.01 actual_eps_b=495.01 actual_combined_eps=990.02 merged_events=30000 effective_jps=490.72 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=657.83 p50_ms=541.00 p95_ms=1180.00 p99_ms=2037.00 p99_9_ms=2589.00 max_e2e_ms=2962.00 avg_corr_ms=156.22 corr_p50=40.00 corr_p95=677.00 corr_p99=1535.00 corr_p99_9=2087.00 corr_max=2458.00
+======================================================================
+
+
+
+
+10 kb
+
+=====================================================================
+  Target Matching Event Pairs      : 30000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 30000 (487.69 EPS)
+  Source B Events Produced         : 30000 (487.69 EPS)
+  Joined & Merged Events Received  : 30000 (100.00% Join Success)
+  Effective Joins Per Second       : 382.38 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=10691.26 | P50=8121.0 | P95=28522.0 | P99=31958.0 | P99.9=34987.0 | MAX=36307.0
+  Correlation Latency (ms)         : Avg=10186.90 | P50=7618.0 | P95=28021.0 | P99=31458.0 | P99.9=34487.0 | MAX=35807.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=500 actual_eps_a=487.69 actual_eps_b=487.69 actual_combined_eps=975.37 merged_events=30000 effective_jps=382.38 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=10691.26 p50_ms=8121.00 p95_ms=28522.00 p99_ms=31958.00 p99_9_ms=34987.00 max_e2e_ms=36307.00 avg_corr_ms=10186.90 corr_p50=7618.00 corr_p95=28021.00 corr_p99=31458.00 corr_p99_9=34487.00 corr_max=35807.00
+======================================================================
+
+
+
+15kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 30000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 30000 (494.27 EPS)
+  Source B Events Produced         : 30000 (494.27 EPS)
+  Joined & Merged Events Received  : 30000 (100.00% Join Success)
+  Effective Joins Per Second       : 259.15 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=38647.97 | P50=35804.0 | P95=68570.0 | P99=70871.0 | P99.9=71908.0 | MAX=72232.0
+  Correlation Latency (ms)         : Avg=38132.49 | P50=35290.0 | P95=68069.0 | P99=70371.0 | P99.9=71407.0 | MAX=71701.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=500 actual_eps_a=494.27 actual_eps_b=494.27 actual_combined_eps=988.55 merged_events=30000 effective_jps=259.15 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=38647.97 p50_ms=35804.00 p95_ms=68570.00 p99_ms=70871.00 p99_9_ms=71908.00 max_e2e_ms=72232.00 avg_corr_ms=38132.49 corr_p50=35290.00 corr_p95=68069.00 corr_p99=70371.00 corr_p99_9=71407.00 corr_max=71701.00
+======================================================================
+
+
+
+
+1000 eps , 60 sec
+
+1kb
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 60000 (988.32 EPS)
+  Source B Events Produced         : 60000 (988.32 EPS)
+  Joined & Merged Events Received  : 60000 (100.00% Join Success)
+  Effective Joins Per Second       : 979.85 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=806.67 | P50=570.0 | P95=1889.0 | P99=2274.0 | P99.9=2554.0 | MAX=2757.0
+  Correlation Latency (ms)         : Avg=303.60 | P50=68.0 | P95=1382.0 | P99=1746.0 | P99.9=2052.0 | MAX=2236.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=988.32 actual_eps_b=988.32 actual_combined_eps=1976.64 merged_events=60000 effective_jps=979.85 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=806.67 p50_ms=570.00 p95_ms=1889.00 p99_ms=2274.00 p99_9_ms=2554.00 max_e2e_ms=2757.00 avg_corr_ms=303.60 corr_p50=68.00 corr_p95=1382.00 corr_p99=1746.00 corr_p99_9=2052.00 corr_max=2236.00
+======================================================================
+
+
+
+2kb
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 60000 (989.53 EPS)
+  Source B Events Produced         : 60000 (989.53 EPS)
+  Joined & Merged Events Received  : 60000 (100.00% Join Success)
+  Effective Joins Per Second       : 955.44 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=10178.34 | P50=10116.0 | P95=21230.0 | P99=23315.0 | P99.9=24914.0 | MAX=26111.0
+  Correlation Latency (ms)         : Avg=9671.86 | P50=9609.0 | P95=20721.0 | P99=22801.0 | P99.9=24407.0 | MAX=25610.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=989.53 actual_eps_b=989.53 actual_combined_eps=1979.06 merged_events=60000 effective_jps=955.44 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=10178.34 p50_ms=10116.00 p95_ms=21230.00 p99_ms=23315.00 p99_9_ms=24914.00 max_e2e_ms=26111.00 avg_corr_ms=9671.86 corr_p50=9609.00 corr_p95=20721.00 corr_p99=22801.00 corr_p99_9=24407.00 corr_max=25610.00
+======================================================================
+
+5KB
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 60000 (988.60 EPS)
+  Source B Events Produced         : 60000 (988.60 EPS)
+  Joined & Merged Events Received  : 60000 (100.00% Join Success)
+  Effective Joins Per Second       : 619.60 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=22934.17 | P50=20133.0 | P95=44714.0 | P99=48388.0 | P99.9=51527.0 | MAX=53908.0
+  Correlation Latency (ms)         : Avg=22428.35 | P50=19627.0 | P95=44212.0 | P99=47887.0 | P99.9=51027.0 | MAX=53408.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=988.60 actual_eps_b=988.60 actual_combined_eps=1977.20 merged_events=60000 effective_jps=619.60 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=22934.17 p50_ms=20133.00 p95_ms=44714.00 p99_ms=48388.00 p99_9_ms=51527.00 max_e2e_ms=53908.00 avg_corr_ms=22428.35 corr_p50=19627.00 corr_p95=44212.00 corr_p99=47887.00 corr_p99_9=51027.00 corr_max=53408.00
+======================================================================
+
+
+10kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 60000 (989.79 EPS)
+  Source B Events Produced         : 60000 (989.79 EPS)
+  Joined & Merged Events Received  : 59995 (99.99% Join Success)
+  Effective Joins Per Second       : 258.56 joins/sec
+  Missing Pairs / Data Loss        : 5 (0.01%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=58578.95 | P50=55590.0 | P95=112179.0 | P99=119124.0 | P99.9=125363.0 | MAX=127246.0
+  Correlation Latency (ms)         : Avg=58076.02 | P50=55089.0 | P95=111677.0 | P99=118618.0 | P99.9=124863.0 | MAX=126745.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=989.79 actual_eps_b=989.79 actual_combined_eps=1979.58 merged_events=59995 effective_jps=258.56 join_success_pct=99.99 missing_pairs=5 data_loss_pct=0.01 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=58578.95 p50_ms=55590.00 p95_ms=112179.00 p99_ms=119124.00 p99_9_ms=125363.00 max_e2e_ms=127246.00 avg_corr_ms=58076.02 corr_p50=55089.00 corr_p95=111677.00 corr_p99=118618.00 corr_p99_9=124863.00 corr_max=126745.00
+======================================================================
+
+
+15kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 60000 (989.84 EPS)
+  Source B Events Produced         : 60000 (989.84 EPS)
+  Joined & Merged Events Received  : 59992 (99.99% Join Success)
+  Effective Joins Per Second       : 258.53 joins/sec
+  Missing Pairs / Data Loss        : 8 (0.01%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=59700.29 | P50=56240.0 | P95=108309.0 | P99=112214.0 | P99.9=115887.0 | MAX=117772.0
+  Correlation Latency (ms)         : Avg=59197.98 | P50=55736.0 | P95=107808.0 | P99=111707.0 | P99.9=115387.0 | MAX=117272.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=989.84 actual_eps_b=989.84 actual_combined_eps=1979.68 merged_events=59992 effective_jps=258.53 join_success_pct=99.99 missing_pairs=8 data_loss_pct=0.01 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=59700.29 p50_ms=56240.00 p95_ms=108309.00 p99_ms=112214.00 p99_9_ms=115887.00 max_e2e_ms=117772.00 avg_corr_ms=59197.98 corr_p50=55736.00 corr_p95=107808.00 corr_p99=111707.00 corr_p99_9=115387.00 corr_max=117272.00
+======================================================================
+
+
+
+1500 eps , 60 sec\\
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 90000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 90000 (1484.54 EPS)
+  Source B Events Produced         : 90000 (1484.54 EPS)
+  Joined & Merged Events Received  : 90000 (100.00% Join Success)
+  Effective Joins Per Second       : 1471.89 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=1419.46 | P50=856.0 | P95=3591.0 | P99=4087.0 | P99.9=4261.0 | MAX=4399.0
+  Correlation Latency (ms)         : Avg=918.03 | P50=355.0 | P95=3090.0 | P99=3583.0 | P99.9=3757.0 | MAX=3897.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1500 actual_eps_a=1484.54 actual_eps_b=1484.54 actual_combined_eps=2969.07 merged_events=90000 effective_jps=1471.89 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=1419.46 p50_ms=856.00 p95_ms=3591.00 p99_ms=4087.00 p99_9_ms=4261.00 max_e2e_ms=4399.00 avg_corr_ms=918.03 corr_p50=355.00 corr_p95=3090.00 corr_p99=3583.00 corr_p99_9=3757.00 corr_max=3897.00
+======================================================================
+
+
+5KB
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 90000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 90000 (1479.27 EPS)
+  Source B Events Produced         : 90000 (1479.27 EPS)
+  Joined & Merged Events Received  : 89990 (99.99% Join Success)
+  Effective Joins Per Second       : 283.01 joins/sec
+  Missing Pairs / Data Loss        : 10 (0.01%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=42790.28 | P50=35020.0 | P95=85316.0 | P99=89392.0 | P99.9=91482.0 | MAX=92780.0
+  Correlation Latency (ms)         : Avg=42287.26 | P50=34517.0 | P95=84806.0 | P99=88891.0 | P99.9=90978.0 | MAX=92271.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1500 actual_eps_a=1479.27 actual_eps_b=1479.27 actual_combined_eps=2958.53 merged_events=89990 effective_jps=283.01 join_success_pct=99.99 missing_pairs=10 data_loss_pct=0.01 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=42790.28 p50_ms=35020.00 p95_ms=85316.00 p99_ms=89392.00 p99_9_ms=91482.00 max_e2e_ms=92780.00 avg_corr_ms=42287.26 corr_p50=34517.00 corr_p95=84806.00 corr_p99=88891.00 corr_p99_9=90978.00 corr_max=92271.00
+======================================================================
+
+10kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 90000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 90000 (1479.24 EPS)
+  Source B Events Produced         : 90000 (1479.24 EPS)
+  Joined & Merged Events Received  : 89988 (99.99% Join Success)
+  Effective Joins Per Second       : 283.01 joins/sec
+  Missing Pairs / Data Loss        : 12 (0.01%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=68231.30 | P50=66135.0 | P95=126905.0 | P99=132143.0 | P99.9=135188.0 | MAX=136491.0
+  Correlation Latency (ms)         : Avg=67729.17 | P50=65632.0 | P95=126404.0 | P99=131640.0 | P99.9=134688.0 | MAX=135990.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1500 actual_eps_a=1479.24 actual_eps_b=1479.24 actual_combined_eps=2958.48 merged_events=89988 effective_jps=283.01 join_success_pct=99.99 missing_pairs=12 data_loss_pct=0.01 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=68231.30 p50_ms=66135.00 p95_ms=126905.00 p99_ms=132143.00 p99_9_ms=135188.00 max_e2e_ms=136491.00 avg_corr_ms=67729.17 corr_p50=65632.00 corr_p95=126404.00 corr_p99=131640.00 corr_p99_9=134688.00 corr_max=135990.00
+======================================================================
+
+15kb
+
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 90000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 90000 (1479.63 EPS)
+  Source B Events Produced         : 90000 (1479.63 EPS)
+  Joined & Merged Events Received  : 89971 (99.97% Join Success)
+  Effective Joins Per Second       : 282.97 joins/sec
+  Missing Pairs / Data Loss        : 29 (0.03%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=98340.40 | P50=92932.0 | P95=175252.0 | P99=181666.0 | P99.9=187134.0 | MAX=189262.0
+  Correlation Latency (ms)         : Avg=97837.75 | P50=92432.0 | P95=174752.0 | P99=181154.0 | P99.9=186634.0 | MAX=188762.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1500 actual_eps_a=1479.63 actual_eps_b=1479.63 actual_combined_eps=2959.26 merged_events=89971 effective_jps=282.97 join_success_pct=99.97 missing_pairs=29 data_loss_pct=0.03 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=98340.40 p50_ms=92932.00 p95_ms=175252.00 p99_ms=181666.00 p99_9_ms=187134.00 max_e2e_ms=189262.00 avg_corr_ms=97837.75 corr_p50=92432.00 corr_p95=174752.00 corr_p99=181154.00 corr_p99_9=186634.00 corr_max=188762.00
+======================================================================
+
+
+
+
+2000eps  , 60 sec 
+
+
+1kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 120000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 120000 (1978.34 EPS)
+  Source B Events Produced         : 120000 (1978.34 EPS)
+  Joined & Merged Events Received  : 120000 (100.00% Join Success)
+  Effective Joins Per Second       : 1640.71 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=9514.36 | P50=8440.0 | P95=19170.0 | P99=21218.0 | P99.9=23036.0 | MAX=23879.0
+  Correlation Latency (ms)         : Avg=9012.39 | P50=7938.0 | P95=18669.0 | P99=20717.0 | P99.9=22536.0 | MAX=23379.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=2000 actual_eps_a=1978.34 actual_eps_b=1978.34 actual_combined_eps=3956.67 merged_events=120000 effective_jps=1640.71 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=9514.36 p50_ms=8440.00 p95_ms=19170.00 p99_ms=21218.00 p99_9_ms=23036.00 max_e2e_ms=23879.00 avg_corr_ms=9012.39 corr_p50=7938.00 corr_p95=18669.00 corr_p99=20717.00 corr_p99_9=22536.00 corr_max=23379.00
+======================================================================
+
+
+
+2kb
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 120000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 120000 (1979.15 EPS)
+  Source B Events Produced         : 120000 (1979.15 EPS)
+  Joined & Merged Events Received  : 120000 (100.00% Join Success)
+  Effective Joins Per Second       : 1347.50 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=17908.47 | P50=15362.0 | P95=36352.0 | P99=38537.0 | P99.9=40481.0 | MAX=41829.0
+  Correlation Latency (ms)         : Avg=17406.72 | P50=14861.0 | P95=35851.0 | P99=38036.0 | P99.9=39981.0 | MAX=41329.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=2000 actual_eps_a=1979.15 actual_eps_b=1979.15 actual_combined_eps=3958.31 merged_events=120000 effective_jps=1347.50 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=17908.47 p50_ms=15362.00 p95_ms=36352.00 p99_ms=38537.00 p99_9_ms=40481.00 max_e2e_ms=41829.00 avg_corr_ms=17406.72 corr_p50=14861.00 corr_p95=35851.00 corr_p99=38036.00 corr_p99_9=39981.00 corr_max=41329.00
+======================================================================
+
+
+5KB
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 120000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 120000 (1979.15 EPS)
+  Source B Events Produced         : 120000 (1979.15 EPS)
+  Joined & Merged Events Received  : 119997 (100.00% Join Success)
+  Effective Joins Per Second       : 339.24 joins/sec
+  Missing Pairs / Data Loss        : 3 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=62939.16 | P50=59374.0 | P95=116928.0 | P99=122788.0 | P99.9=125881.0 | MAX=128067.0
+  Correlation Latency (ms)         : Avg=62436.55 | P50=58868.0 | P95=116425.0 | P99=122284.0 | P99.9=125381.0 | MAX=127567.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=2000 actual_eps_a=1979.15 actual_eps_b=1979.15 actual_combined_eps=3958.31 merged_events=119997 effective_jps=339.24 join_success_pct=100.00 missing_pairs=3 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=62939.16 p50_ms=59374.00 p95_ms=116928.00 p99_ms=122788.00 p99_9_ms=125881.00 max_e2e_ms=128067.00 avg_corr_ms=62436.55 corr_p50=58868.00 corr_p95=116425.00 corr_p99=122284.00 corr_p99_9=125381.00 corr_max=127567.00
+======================================================================
+
+
+10kb
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 120000
+  Latency Between Events (A/B)     : 500 ms
+  Source A Events Produced         : 120000 (1973.29 EPS)
+  Source B Events Produced         : 120000 (1973.29 EPS)
+  Joined & Merged Events Received  : 60160 (50.13% Join Success)
+  Effective Joins Per Second       : 497.54 joins/sec
+  Missing Pairs / Data Loss        : 59840 (49.87%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=47628.81 | P50=47195.0 | P95=93128.0 | P99=100381.0 | P99.9=103496.0 | MAX=104875.0
+  Correlation Latency (ms)         : Avg=47124.36 | P50=46694.0 | P95=92628.0 | P99=99881.0 | P99.9=102996.0 | MAX=104375.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=2000 actual_eps_a=1973.29 actual_eps_b=1973.29 actual_combined_eps=3946.59 merged_events=60160 effective_jps=497.54 join_success_pct=50.13 missing_pairs=59840 data_loss_pct=49.87 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=47628.81 p50_ms=47195.00 p95_ms=93128.00 p99_ms=100381.00 p99_9_ms=103496.00 max_e2e_ms=104875.00 avg_corr_ms=47124.36 corr_p50=46694.00 corr_p95=92628.00 corr_p99=99881.00 corr_p99_9=102996.00 corr_max=104375.00
+======================================================================
+
+15kb 
+
+
+
+
+single task manager with 8 task slots
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 120000
+  Latency Between Events (A/B)     : 5000 ms
+  Source A Events Produced         : 120000 (958.99 EPS)
+  Source B Events Produced         : 120000 (958.99 EPS)
+  Joined & Merged Events Received  : 120000 (100.00% Join Success)
+  Effective Joins Per Second       : 955.00 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=5116.88 | P50=5031.0 | P95=5747.0 | P99=6343.0 | P99.9=6819.0 | MAX=7067.0
+  Correlation Latency (ms)         : Avg=116.46 | P50=31.0 | P95=746.0 | P99=1342.0 | P99.9=1819.0 | MAX=2067.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=958.99 actual_eps_b=958.99 actual_combined_eps=1917.99 merged_events=120000 effective_jps=955.00 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=5116.88 p50_ms=5031.00 p95_ms=5747.00 p99_ms=6343.00 p99_9_ms=6819.00 max_e2e_ms=7067.00 avg_corr_ms=116.46 corr_p50=31.00 corr_p95=746.00 corr_p99=1342.00 corr_p99_9=1819.00 corr_max=2067.00
+======================================================================
+
+
+
+
+
+2 task managers with 4 task slots each
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 5000 ms
+  Source A Events Produced         : 60000 (921.43 EPS)
+  Source B Events Produced         : 60000 (921.43 EPS)
+  Joined & Merged Events Received  : 60000 (100.00% Join Success)
+  Effective Joins Per Second       : 913.98 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=12733.51 | P50=12892.0 | P95=19730.0 | P99=20497.0 | P99.9=21564.0 | MAX=22050.0
+  Correlation Latency (ms)         : Avg=7725.55 | P50=7889.0 | P95=14724.0 | P99=15491.0 | P99.9=16561.0 | MAX=17050.0
+======================================================================
+
+
+
+
+
+4 task manager with 2 task slots each
+
+
+======================================================================
+          BENCHMARK VERIFICATION & METRICS SUMMARY REPORT
+======================================================================
+  Target Matching Event Pairs      : 60000
+  Latency Between Events (A/B)     : 5000 ms
+  Source A Events Produced         : 60000 (919.92 EPS)
+  Source B Events Produced         : 60000 (919.92 EPS)
+  Joined & Merged Events Received  : 60000 (100.00% Join Success)
+  Effective Joins Per Second       : 771.30 joins/sec
+  Missing Pairs / Data Loss        : 0 (0.00%)
+  Duplicate Merged Pairs           : 0 (0.00%)
+  Incorrect Merged Pairs           : 0 (0.00%)
+  --------------------------------------------------------------------
+  End-to-End Latency (ms)          : Avg=23361.05 | P50=23725.0 | P95=34510.0 | P99=37627.0 | P99.9=39603.0 | MAX=40883.0
+  Correlation Latency (ms)         : Avg=18345.46 | P50=18722.0 | P95=29503.0 | P99=32622.0 | P99.9=34565.0 | MAX=35883.0
+======================================================================
+[EMPIRICAL_BENCHMARK_RESULT] target_eps=1000 actual_eps_a=919.92 actual_eps_b=919.92 actual_combined_eps=1839.84 merged_events=60000 effective_jps=771.30 join_success_pct=100.00 missing_pairs=0 data_loss_pct=0.00 duplicate_pairs=0 duplicate_pct=0.00 incorrect_pairs=0 incorrect_pct=0.00 avg_e2e_ms=23361.05 p50_ms=23725.00 p95_ms=34510.00 p99_ms=37627.00 p99_9_ms=39603.00 max_e2e_ms=40883.00 avg_corr_ms=18345.46 corr_p50=18722.00 corr_p95=29503.00 corr_p99=32622.00 corr_p99_9=34565.00 corr_max=35883.00
+======================================================================
+
+

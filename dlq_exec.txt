@@ -1,0 +1,21 @@
+1. Inspect All 5 DLQ Topics via Docker (Recommended)
+🔹 Validation DLQ (Malformed inputs / Missing IMSI)
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic validation_dlq --from-beginning
+🔹 Correlation Timeout DLQ (Unmatched events after timeout)
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic correlation_dlq --from-beginning
+🔹 Aerospike Storage DLQ (Write failures after retries)
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic aerospike_dlq --from-beginning
+🔹 Payload Fetch DLQ (Missing payload in Aerospike)
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic payload_fetch_dlq --from-beginning
+🔹 General Processing DLQ (Merge / execution errors)
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic processing_dlq --from-beginning
+2. Consume ALL DLQ Topics Simultaneously
+To stream messages from all 5 DLQ topics in one terminal window:
+
+powershell
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --whitelist ".*_dlq" --from-beginning

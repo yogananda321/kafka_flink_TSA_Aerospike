@@ -1,0 +1,45 @@
+# ==============================================================================
+# Flink Production Runtime Configuration
+# ==============================================================================
+
+jobmanager.rpc.address: flink-jobmanager
+jobmanager.rpc.port: 6123
+jobmanager.memory.process.size: 2048m
+
+taskmanager.numberOfTaskSlots: 4
+parallelism.default: 4
+taskmanager.memory.process.size: 4096m
+taskmanager.memory.managed.size: 1024m
+taskmanager.memory.network.min: 512m
+taskmanager.memory.network.max: 1024m
+
+# State Backend & RocksDB
+state.backend: rocksdb
+state.backend.incremental: true
+state.backend.rocksdb.memory.managed: true
+state.backend.rocksdb.memory.fixed-per-slot: 384mb
+state.backend.rocksdb.thread.num: 4
+state.backend.rocksdb.compaction.style: LEVEL
+state.backend.rocksdb.use-bloom-filter: true
+
+# Checkpointing & Storage
+execution.checkpointing.interval: 30000
+execution.checkpointing.mode: EXACTLY_ONCE
+execution.checkpointing.timeout: 120000
+execution.checkpointing.min-pause: 10000
+execution.checkpointing.max-concurrent-checkpoints: 1
+execution.checkpointing.tolerable-failed-checkpoints: 2
+execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+execution.checkpointing.unaligned.enabled: true
+state.checkpoints.dir: file:///tmp/flink-checkpoints
+
+# Restart Strategy
+restart-strategy: exponential-delay
+restart-strategy.exponential-delay.initial-backoff: 1s
+restart-strategy.exponential-delay.max-backoff: 30s
+restart-strategy.exponential-delay.backoff-multiplier: 2.0
+restart-strategy.exponential-delay.reset-backoff-threshold: 2m
+restart-strategy.exponential-delay.jitter-factor: 0.1
+
+# High Availability (ZooKeeper or Kubernetes)
+high-availability.type: NONE
